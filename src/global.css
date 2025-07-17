@@ -59,6 +59,18 @@ html{
 
 .player-card {
   animation: popIn 0.5s ease-out forwards;
+  background: no-repeat url(assets/images/lobbyPlayerIcon.jpg);
+  background-size: contain;
+  display: flex;
+  flex-flow: column;
+  font-weight: bold;
+  justify-content: center;
+  vertical-align: middle;
+  height: 150px;
+  text-align: center;
+  width: 150px;
+  
+
 }
 
 .role-reveal {
@@ -71,6 +83,8 @@ html{
   color: white;
   box-shadow: 0 0 30px red;
 }
+
+
 
 
 

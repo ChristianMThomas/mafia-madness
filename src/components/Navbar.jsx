@@ -14,7 +14,7 @@ const NavBar = () => {
         {<nav className="space-x-6 text-sm font-medium">
           
           <Link to="/Home" className="hover:text-red-400 transition duration-200">Home</Link>
-          <a href="/Home#How-To-Play" className="hover:text-red-400 transition duration-200">How to Play</a>
+          <a href="/Home#How-To-Play" className="hover:text-red-400 transition duration-200">Instructions</a>
           <Link to="/Lobby" className="hover:text-red-400 transition duration-200">Play</Link>
           <Link to="/Login" className="hover:text-red-400 transition duration-200">Logout</Link>
         </nav> }

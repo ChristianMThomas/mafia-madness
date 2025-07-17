@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Lobby = () => {
-  const [roomCode, setRoomCode] = useState("");         //store & create game code 
-  const [createdRoom, setCreatedRoom] = useState("");   //store & create game room
+  const [roomCode, setRoomCode] = useState(""); //store & create game code
+  const [createdRoom, setCreatedRoom] = useState(""); //store & create game room
   const [joinedRoom, setJoinedRoom] = useState("");
   const [playerName, setPlayerName] = useState("");
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const Lobby = () => {
     if (savedName) setPlayerName(savedName);
     if (savedRoom) {
       setRoomCode(savedRoom);
-      setJoinedRoom(savedRoom); // Optional: show code as joined
+      setJoinedRoom(savedRoom); //  show code as joined
     }
   }, []);
 
@@ -30,34 +30,42 @@ const Lobby = () => {
     setJoinedRoom("");
     localStorage.setItem("playerName", playerName.trim());
     localStorage.setItem("roomCode", newCode);
+
+    // Redirect to MafiaMadnessGame with state
+    navigate("/MafiaMadnessGame", {
+      state: {
+        playerName: playerName.trim(),
+        roomCode: newCode,
+        isHost: true,
+      },
+    });
   };
 
   const handleJoinRoom = () => {
-  if (!playerName.trim()) {
-    alert('Please enter your name before joining a room.');
-    return;
-  }
+    if (!playerName.trim()) {
+      alert("Please enter your name before joining a room.");
+      return;
+    }
 
-  if (roomCode.trim().length === 5) {
-    const joined = roomCode.trim().toUpperCase();
+    if (roomCode.trim().length === 5) {
+      const joined = roomCode.trim().toUpperCase();
 
-    // Save to localStorage (optional for persistence)
-    localStorage.setItem('playerName', playerName.trim());
-    localStorage.setItem('roomCode', joined);
+      // Save to localStorage (optional for persistence)
+      localStorage.setItem("playerName", playerName.trim());
+      localStorage.setItem("roomCode", joined);
 
-    // Redirect to MafiaMadnessGame with state
-    navigate('/MafiaMadnessGame', {
-      state: {
-        playerName: playerName.trim(),
-        roomCode: joined,
-      },
-    });
-  } else {
-    alert('Please enter a valid 5-character room code.');
-  }
-};
-
-
+      // Redirect to MafiaMadnessGame with state
+      navigate("/MafiaMadnessGame", {
+        state: {
+          playerName: playerName.trim(),
+          roomCode: joined,
+          isHost: false,
+        },
+      });
+    } else {
+      alert("Please enter a valid 5-character room code.");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-black text-white px-6 py-16 flex flex-col items-center space-y-12">
@@ -69,7 +77,7 @@ const Lobby = () => {
       <div className="w-full max-w-md text-center bg-white text-black border-2">
         <label
           htmlFor="playerName"
-          className="block text-lg font-semibold mb-2"
+          className="block text-2xl font-semibold mb-2"
         >
           Enter Your Name
         </label>
@@ -78,15 +86,15 @@ const Lobby = () => {
           type="text"
           value={playerName}
           onChange={(e) => setPlayerName(e.target.value)}
-          placeholder="e.g., ShadowFox"
-          className="w-full p-3 rounded text-black text-center"
+          placeholder="e.g., NotChris67"
+          className="w-full p-3 rounded text-black text-center  rounded-2xl"
         />
       </div>
 
-      <div className="flex flex-col md:flex-row justify-center items-stretch gap-10 w-full max-w-5xl">
+      <div className="flex flex-col md:flex-row justify-center items-stretch gap-20 w-full max-w-5xl">
         {/* Create Room */}
         <div className="bg-gray-800 p-6 rounded shadow-lg flex-1 text-center">
-          <h2 className="text-xl font-semibold mb-4">Create a Room</h2>
+          <h2 className="text-2xl font-semibold mb-4">Create a Room</h2>
           <button
             onClick={handleCreateRoom}
             className="bg-red-900 hover:bg-red-400 text-black font-bold py-2 px-4 rounded transition"
@@ -102,7 +110,7 @@ const Lobby = () => {
 
         {/* Join Room */}
         <div className="bg-gray-800 p-6 rounded shadow-lg flex-1 text-center">
-          <h2 className="text-xl font-semibold mb-4">Join a Room</h2>
+          <h2 className="text-2xl font-semibold mb-4">Join a Room</h2>
           <input
             type="text"
             value={roomCode}
@@ -124,23 +132,6 @@ const Lobby = () => {
           )}
         </div>
       </div>
-
-      {/* Launch Game */}
-      {(createdRoom || joinedRoom) && (
-        <button
-          onClick={() => {
-            navigate("/MafiaMadnessGame", {
-              state: {
-                roomCode: createdRoom || joinedRoom,
-                playerName: playerName,
-              },
-            });
-          }}
-          className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded transition mt-6"
-        >
-          Launch Game
-        </button>
-      )}
     </div>
   );
 };
