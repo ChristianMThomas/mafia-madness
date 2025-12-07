@@ -1,0 +1,552 @@
+@import "tailwindcss";
+
+/* ============================================
+   MAFIA MADNESS - MIDNIGHT INTRIGUE DESIGN SYSTEM
+   ============================================ */
+
+/* Import custom fonts from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Courier+Prime:wght@400;700&display=swap');
+
+@theme {
+  /* ========== CUSTOM COLORS - MIDNIGHT INTRIGUE ========== */
+  --color-deep-noir: #0A0E1A;
+  --color-blood-orange: #E63946;
+  --color-gold-conspiracy: #E63946;
+  --color-slate-fog: #475569;
+  --color-ice-blue: #A8DADC;
+  --color-shadow-purple: #8B5CF6;
+  --color-emerald-whisper: #10B981;
+  --color-dark-slate: #1A1F2E;
+  --color-light-bg: #F8F9FA;
+  --color-light-surface: #FFFFFF;
+  --color-light-text: #1A1F2E;
+  --color-light-muted: #64748B;
+
+  /* ========== TYPOGRAPHY ========== */
+  --font-family-display: 'Bebas Neue', sans-serif;
+  --font-family-body: 'Inter', sans-serif;
+  --font-family-mono: 'Courier Prime', monospace;
+
+  /* ========== CUSTOM UTILITIES ========== */
+  --radius-card: 12px;
+
+  /* Text shadows for glowing effects */
+  --text-shadow-purple-sm: 0 0 20px rgb(139 92 246 / 0.3);
+  --text-shadow-purple-md: 0 0 40px rgb(139 92 246 / 0.4);
+  --text-shadow-purple-lg: 0 0 40px rgb(139 92 246 / 0.4), 0 0 80px rgb(139 92 246 / 0.2);
+  --text-shadow-red: 0 0 30px rgb(230 57 70 / 0.5);
+
+  /* Box shadows */
+  --shadow-glow-purple: 0 8px 32px rgb(139 92 246 / 0.3);
+  --shadow-glow-red: 0 8px 32px rgb(230 57 70 / 0.15);
+  --shadow-card: 0 4px 20px rgb(0 0 0 / 0.4);
+  --shadow-card-light: 0 4px 20px rgb(0 0 0 / 0.1);
+}
+
+/* ========== GLOBAL STYLES ========== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-[Inter] min-h-screen overflow-x-hidden transition-colors duration-500;
+}
+
+/* Default Dark Theme */
+[data-theme="dark"] body,
+body {
+  @apply bg-[#0A0E1A] text-[#A8DADC];
+}
+
+/* Light Theme - Much brighter for visibility */
+[data-theme="light"] body {
+  @apply bg-gradient-to-br from-[#E0E7FF] via-[#F3F4F6] to-[#FEF3C7] text-[#1F2937];
+}
+
+/* ========== CUSTOM UTILITY CLASSES ========== */
+.font-display {
+  font-family: var(--font-family-display);
+}
+
+.font-body {
+  font-family: var(--font-family-body);
+}
+
+.font-mono {
+  font-family: var(--font-family-mono);
+}
+
+.text-shadow-purple-glow {
+  text-shadow: var(--text-shadow-purple-lg);
+}
+
+.text-shadow-purple-md {
+  text-shadow: var(--text-shadow-purple-md);
+}
+
+.shadow-glow-purple {
+  box-shadow: var(--shadow-glow-purple);
+}
+
+.shadow-glow-red {
+  box-shadow: var(--shadow-glow-red);
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+.shadow-card-light {
+  box-shadow: var(--shadow-card-light);
+}
+
+/* Theme-aware text colors */
+.text-theme-primary {
+  @apply text-[#8B5CF6] transition-colors duration-500;
+}
+
+[data-theme="light"] .text-theme-primary {
+  @apply text-[#7C3AED];
+}
+
+.text-theme-body {
+  @apply text-[#A8DADC] transition-colors duration-500;
+}
+
+[data-theme="light"] .text-theme-body {
+  @apply text-[#374151];
+}
+
+.text-theme-muted {
+  @apply text-[#475569] transition-colors duration-500;
+}
+
+[data-theme="light"] .text-theme-muted {
+  @apply text-[#6B7280];
+}
+/* ========== ANIMATIONS ========== */
+
+/* Silhouette Dissolve - Player elimination effect */
+@keyframes dissolve {
+  0% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  50% {
+    opacity: 0.5;
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(0.8);
+  }
+}
+
+/* Dossier Flip - Role card reveal */
+@keyframes dossier-flip {
+  0% {
+    transform: perspective(1000px) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(1000px) rotateY(90deg);
+  }
+  100% {
+    transform: perspective(1000px) rotateY(0deg);
+  }
+}
+
+/* Stamp Impact - For dossier reveal */
+@keyframes stamp-impact {
+  0% {
+    transform: scale(2) rotate(-5deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) rotate(-3deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(-2deg);
+    opacity: 1;
+  }
+}
+
+/* Typewriter Effect */
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Pulsing Glow - For vote buttons */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(230, 57, 70, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(230, 57, 70, 0.8), 0 0 60px rgba(230, 57, 70, 0.4);
+  }
+}
+
+/* Smoke Wisp - Background effect for avatars */
+@keyframes smoke-wisp {
+  0% {
+    transform: translateX(-10%) translateY(0);
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(10%) translateY(-20px);
+    opacity: 0;
+  }
+}
+
+/* Scroll animation for role showcase */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pop In - Player card entrance */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  60% {
+    transform: scale(1.05) translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Fade In Zoom - For dramatic reveals */
+@keyframes fadeInZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Spotlight sweep */
+@keyframes spotlight-sweep {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Vote tally scratch marks */
+@keyframes scratch-appear {
+  0% {
+    stroke-dashoffset: 100;
+    opacity: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+/* ========== COMPONENT STYLES ========== */
+
+/* Frosted Glass Cards */
+.glass-card {
+  @apply backdrop-blur-xl rounded-xl transition-all duration-300;
+  @apply hover:-translate-y-1;
+}
+
+[data-theme="dark"] .glass-card,
+.glass-card {
+  @apply bg-[#475569]/15 border border-[#E63946]/20 shadow-card;
+  @apply hover:shadow-glow-red hover:border-[#E63946]/40;
+}
+
+[data-theme="light"] .glass-card {
+  @apply bg-white/95 border-2 border-[#8B5CF6]/40 shadow-[0_8px_32px_rgba(139,92,246,0.15)];
+  @apply hover:shadow-[0_12px_48px_rgba(139,92,246,0.25)] hover:border-[#8B5CF6]/60;
+}
+
+/* Primary Button - Red CTA */
+.btn-primary {
+  @apply bg-gradient-to-br from-[#E63946] to-[#D32F3A] text-white font-bold py-3.5 px-8 rounded-lg;
+  @apply transition-all duration-250 cursor-pointer min-h-[44px] min-w-[44px];
+  @apply hover:scale-[1.02] hover:brightness-110;
+  @apply active:scale-[0.98];
+  @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#8B5CF6] focus-visible:outline-offset-2;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+/* Danger Button - Blood Orange */
+.btn-danger {
+  @apply bg-[#E63946] text-white font-bold py-3.5 px-8 rounded-lg;
+  @apply transition-all duration-250 cursor-pointer min-h-[44px] min-w-[44px];
+  @apply hover:scale-[1.02] hover:shadow-glow-red;
+  @apply active:scale-[0.98];
+  @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#8B5CF6] focus-visible:outline-offset-2;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+/* Ghost Button - Secondary */
+.btn-ghost {
+  @apply bg-transparent text-[#8B5CF6] font-semibold py-3.5 px-8 rounded-lg border-2 border-[#475569];
+  @apply transition-all duration-250 cursor-pointer min-h-[44px] min-w-[44px];
+  @apply hover:border-[#8B5CF6] hover:text-[#8B5CF6] hover:bg-[#8B5CF6]/10;
+  @apply active:scale-[0.98];
+  @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#8B5CF6] focus-visible:outline-offset-2;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+/* Input Fields */
+.input-field {
+  @apply px-4 py-3 rounded-lg w-full transition-all duration-300;
+  @apply focus:outline-none focus:border-[#8B5CF6] focus:ring-4 focus:ring-[#8B5CF6]/20;
+}
+
+[data-theme="dark"] .input-field,
+.input-field {
+  @apply bg-[#1A1F2E] border-2 border-[#A8DADC] text-[#A8DADC] placeholder:text-[#A8DADC]/60;
+}
+
+[data-theme="light"] .input-field {
+  @apply bg-white border-2 border-[#8B5CF6]/50 text-[#1F2937] placeholder:text-[#6B7280];
+  @apply shadow-sm;
+}
+
+/* Silhouette Player Avatar */
+.player-silhouette {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(71, 85, 105, 0.3), rgba(10, 14, 26, 0.8));
+  border: 3px solid var(--color-slate-fog);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all var(--transition-base);
+}
+
+.player-silhouette:hover {
+  border-color: var(--color-shadow-purple);
+  transform: scale(1.05);
+}
+
+.player-silhouette::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(168, 218, 220, 0.1), transparent);
+  animation: smoke-wisp 4s ease-in-out infinite;
+}
+
+.player-silhouette.eliminated {
+  animation: dissolve 2s ease-out forwards;
+}
+
+/* Role Card Styles */
+.role-scroll-wrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.role-scroll {
+  display: flex;
+  animation: scroll-left 30s linear infinite;
+  width: max-content;
+}
+
+.role-card {
+  flex: 0 0 auto;
+  min-width: 280px;
+  margin: 0 1rem;
+  padding: 2rem 1.5rem;
+  background: linear-gradient(135deg, rgba(71, 85, 105, 0.2), rgba(10, 14, 26, 0.6));
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(230, 57, 70, 0.3);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+  transition: all var(--transition-base);
+}
+
+.role-card:hover {
+  border-color: var(--color-shadow-purple);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-glow-purple);
+}
+
+.role-card h3 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-3xl);
+  color: var(--color-blood-orange);
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.role-card p {
+  color: var(--color-ice-blue);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+}
+
+/* Player Card - Lobby */
+.player-card {
+  animation: popIn 0.5s ease-out forwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  font-weight: 700;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(71, 85, 105, 0.4), rgba(10, 14, 26, 0.8));
+  border: 2px solid var(--color-slate-fog);
+  border-radius: var(--radius-md);
+  color: var(--color-ice-blue);
+  font-family: var(--font-family-body);
+  transition: all var(--transition-base);
+}
+
+.player-card:hover {
+  border-color: var(--color-shadow-purple);
+  transform: scale(1.05);
+}
+
+/* Dossier Role Reveal */
+.role-reveal {
+  animation: fadeInZoom 1s ease-out forwards;
+  background: radial-gradient(circle at center, rgba(139, 92, 246, 0.2), var(--color-deep-noir));
+  padding: 3rem;
+  border-radius: var(--radius-lg);
+  border: 3px solid var(--color-shadow-purple);
+  text-align: center;
+  font-size: var(--font-size-5xl);
+  font-family: var(--font-family-display);
+  color: var(--color-shadow-purple);
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.role-reveal::after {
+  content: 'CONFIDENTIAL';
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  color: rgba(230, 57, 70, 0.4);
+  transform: rotate(-5deg);
+  animation: stamp-impact 0.6s ease-out 0.5s backwards;
+}
+
+/* Dossier Card Container */
+.dossier-card {
+  perspective: 1000px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.dossier-card.flipping .dossier-inner {
+  animation: dossier-flip 0.8s ease-in-out;
+}
+
+.dossier-inner {
+  position: relative;
+  width: 100%;
+  padding: 2rem;
+  background: linear-gradient(to bottom, rgba(26, 31, 46, 0.95), rgba(10, 14, 26, 0.98));
+  border: 2px solid var(--color-shadow-purple);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 14, 26, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background: var(--color-dark-slate);
+  border: 2px solid var(--color-slate-fog);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  max-width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-card);
+  animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility - Focus states */
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--color-shadow-purple);
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+
+
+

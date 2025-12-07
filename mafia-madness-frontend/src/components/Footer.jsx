@@ -17,16 +17,16 @@ const Footer = () => {
 
         {/* Social Links */}
         <div className="flex space-x-6 text-xl">
-          <a href="mailto:ct17183@mind-forge-cthomas.com" className="hover:text-yellow-400 transition duration-200" title="Email">
+          <a href="mailto:ct17183@mind-forge-cthomas.com" className="hover:text-[#E63946] transition duration-200" title="Email">
             📧
           </a>
-          <a href="https://github.com/ChristianMThomas" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition duration-200" title="GitHub">
+          <a href="https://github.com/ChristianMThomas" target="_blank" rel="noopener noreferrer" className="hover:text-[#E63946] transition duration-200" title="GitHub">
             💻
           </a>
-          <a href="https://twitter.com/MindForge2LLC" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition duration-200" title="Twitter">
+          <a href="https://twitter.com/MindForge2LLC" target="_blank" rel="noopener noreferrer" className="hover:text-[#E63946] transition duration-200" title="Twitter">
             🐦
           </a>
-          <a href="https://discord.gg/jcQffV4VXF" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition duration-200" title="Discord">
+          <a href="https://discord.gg/jcQffV4VXF" target="_blank" rel="noopener noreferrer" className="hover:text-[#E63946] transition duration-200" title="Discord">
             🗨️
           </a>
         </div>
